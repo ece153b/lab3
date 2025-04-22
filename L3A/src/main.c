@@ -42,7 +42,7 @@ int main() {
 
 	
 	while(1) {
-		delay(10); //1000 seems way to long - check with TA
+		delay(1000); //1000 seems way to long - check with TA
 		Green_LED_Toggle(); 
 	}
 }

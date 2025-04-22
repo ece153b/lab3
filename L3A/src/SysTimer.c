@@ -15,7 +15,7 @@ void SysTick_Init(void) {
 	SysTick->CTRL = 0; // Disable SysTick IRQ and SysTick Counter
 	
 	// SysTick Reload Value Register
-	SysTick->LOAD = 100000; // [TODO] - Enter the correct LOAD value that will give us a 1 ms period
+	SysTick->LOAD = 999; //Enter the correct LOAD value that will give us a 1 ms period
 	
 	// SysTick Current Value Register
 	SysTick->VAL = 0;
