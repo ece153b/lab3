@@ -113,7 +113,9 @@ void TIM5_CH1_Init(void){
 }
 
 int main(void) {
-	int i;
+	int i = 0;
+	int x = 0; 
+	int test = 0;
 	int led = 1;
 	int dire = 1;
 	
@@ -128,6 +130,7 @@ int main(void) {
 		if(led)
 		{
 			TIM2->CCR1++;
+			//TIM5->CCR1++;
 			if(TIM2->CCR1 == TIM2->ARR)
 			{
 				led = 0; 
@@ -136,19 +139,53 @@ int main(void) {
 		else
 		{
 			TIM2->CCR1--;
+			//TIM5->CCR1--;
 			if(TIM2->CCR1 == 0)
 			{
 				led = 1; 
 			}
 		}
 		
-		TIM5->CCR1 = 50; 
-		for(i=0;i<100000;i++);  		// delay
-		TIM5->CCR1=150; 
-		for(i=0;i<100000;i++);  		// delay
-		TIM5->CCR1=250; 
-		for(i=0;i<100000;i++);  		// delay
-				TIM5->CCR1=150; 
-		for(i=0;i<100000;i++);  		// delay
+		/* Solution 1 - drives it to 3 steps independent of LED
+		if(i == 300)
+		{
+			if(TIM5->CCR1 == 50)
+			{
+				TIM5->CCR1 = 150; 
+			}
+			else if(TIM5->CCR1 == 150)
+			{
+				TIM5->CCR1 = 250;
+			}
+			else if(TIM5->CCR1 == 250)
+			{
+				TIM5->CCR1 = 50;
+			}
+			
+			i = 0; 
+		}
+		else
+		{
+			i++; 
+		}
+		*/
+		
+		/* Solution 2 - goes all the way left or right when LED peaks
+		if(TIM2->CCR1 == 0)
+		{
+			TIM5->CCR1 = 50;
+		}
+		else if(TIM2->CCR1 == TIM2->ARR)
+		{
+			TIM5->CCR1 =  250; 
+		}
+		*/
+		led =
+		test = (200.0*((TIM2->CCR1)/TIM2->ARR))+50.0;
+		TIM5->CCR1 = (200.0*((TIM2->CCR1)/TIM2->ARR))+50.0;
+		
+		
+		for(x=0;x<300;x++);  		// delay
+		
 	}
 }

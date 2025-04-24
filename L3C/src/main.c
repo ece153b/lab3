@@ -59,8 +59,11 @@ void Trigger_Setup() {
 	TIM1->CCMR1 |= TIM_CCMR1_OC1M_2;  //Make sure this is the right mode register
 	TIM1->CCMR1 &= TIM_CCMR1_OC1PE;  //Enable output compare preload
 	
-	//Enable the output in the capture/compare enable register.
+	//Enable the output in the capture/compare enable register. (Assuming CC1, check with TA)
+	TIM1->CCER	|= TIM_CCER_CC1E;
 	
+	//In the break and dead-time register, set the bits (at the same time) for main output
+	//enable, off-state selection for run mode, and off-state selection for idle mode.
 	
 	
 	
