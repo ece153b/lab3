@@ -92,22 +92,22 @@ void TIM5_CH1_Init(void){
 	// Counting direction: 0 = up-counting, 1 = down-counting
 		TIM5->CR1 &= ~(TIM_CR1_DIR);
   // Prescaler
-		TIM5->PSC = 79; 
+		TIM5->PSC = 39; 
   // Auto-reload
-		TIM5->ARR = 999; 
+		TIM5->ARR = 1999; 
 	// Disable output compare mode
 		TIM5->CCMR1 &= ~(TIM_CCMR1_OC1M); //clear the output compare mode bits
 	// PWM mode 1
 		TIM5->CCMR1 |= TIM_CCMR1_OC1M_1; //Set the output compare mode bits to PWM mode 1
 		TIM5->CCMR1 |= TIM_CCMR1_OC1M_2; 
 	// Output 1 preload enable
-		TIM5->CCMR1 |= TIM_CCMR1_OC1PE; //Enable output preload
+		TIM5->CCMR1 |= TIM_CCMR1_OC1PE; //Enable output preload  	 	
 	// Select output polarity: active high
 		TIM5->CCER &= ~(TIM_CCER_CC1P);
   // Enable output for ch1
 		TIM5->CCER |= TIM_CCER_CC1E;
 	// Output Compare Register for channel 1 
-		TIM5->CCR1 = 500; 
+		TIM5->CCR1 = 50; 
 	// Enable counter
 		TIM5->CR1 |= TIM_CR1_CEN;
 }
@@ -142,23 +142,13 @@ int main(void) {
 			}
 		}
 		
-		if(dire)
-		{
-			TIM5->CCR1++;
-			if(TIM5->CCR1 == TIM5->ARR)
-			{
-				dire = 0; 
-			}
-		}
-		else
-		{
-			TIM5->CCR1--;
-			if(TIM5->CCR1 == 0)
-			{
-				dire = 1; 
-			}
-		}
-		
-		for(i=0;i<300;i++);  		// delay
-    }
+		TIM5->CCR1 = 50; 
+		for(i=0;i<100000;i++);  		// delay
+		TIM5->CCR1=150; 
+		for(i=0;i<100000;i++);  		// delay
+		TIM5->CCR1=250; 
+		for(i=0;i<100000;i++);  		// delay
+				TIM5->CCR1=150; 
+		for(i=0;i<100000;i++);  		// delay
+	}
 }
