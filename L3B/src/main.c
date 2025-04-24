@@ -146,6 +146,21 @@ int main(void) {
 			}
 		}
 		
+		/*
+		if(TIM2->CCR1 == 0)
+		{
+			TIM5->CCR1 = 100; 
+		}
+		else if(TIM2->CCR1 == 500)
+		{
+			TIM5->CCR1 = 150; 
+		}
+		else if(TIM2->CCR1 == TIM2->ARR)
+		{
+			TIM5->CCR1 = 200; 
+		}
+		*/
+		
 		/* Solution 1 - drives it to 3 steps independent of LED
 		if(i == 300)
 		{
@@ -180,9 +195,9 @@ int main(void) {
 			TIM5->CCR1 =  250; 
 		}
 		*/
-		led =
-		test = (200.0*((TIM2->CCR1)/TIM2->ARR))+50.0;
-		TIM5->CCR1 = (200.0*((TIM2->CCR1)/TIM2->ARR))+50.0;
+		
+		//TIM5->CCR1 = (200.0*((TIM2->CCR1)/TIM2->ARR))+50.0;
+		TIM5->CCR1 = (50 + ((TIM2->CCR1) / (4.5))); 
 		
 		
 		for(x=0;x<300;x++);  		// delay
