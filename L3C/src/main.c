@@ -24,7 +24,13 @@ void TIM4_IRQHandler(void) {
 }
 
 void Trigger_Setup() {
-	// [TODO]
+	//Setup PA9
+	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN; //Enable clock for GPIO Pin A
+	//Configure PA9 to be used as alternative function TIM1_CH2
+	GPIOA->MODER &= ~(GPIO_MODER_MODE9); //Clear the mode register
+	GPIOA->MODER |= GPIO_MODER_MODE9_1; //Set to Alternative Function
+	GPIOA->AFR[0] &= ~(GPIO_AFRH_AFSEL9); //configure and select alternative function for PA5 
+	GPIOA->AFR[0] |= GPIO_AFRH_AFSEL9_0; 
 }
 
 int main(void) {	
