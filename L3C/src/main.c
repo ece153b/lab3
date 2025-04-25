@@ -164,7 +164,14 @@ int main(void) {
 	
 	while(1) {
 		//Store your measurements on Stack in cm
-		distance = timeInterval/58;
+		if(timeInterval > 3000)
+		{
+			distance = 0; 
+		}
+		else
+		{
+			distance = timeInterval/58;
+		}
 
 	}
 }
